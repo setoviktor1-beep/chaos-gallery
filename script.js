@@ -28,8 +28,8 @@ function initChaos() {
             rot += rotSpeed;
 
             // Atšokimas nuo sienų
-            if (x < -100 || x > window.innerWidth - 200) dx *= -1;
-            if (y < -100 || y > window.innerHeight - 200) dy *= -1;
+            const currentWidth = img.offsetWidth; if (x < -50 || x > window.innerWidth - currentWidth + 50) dx *= -1;
+            const currentHeight = img.offsetHeight; if (y < -50 || y > window.innerHeight - currentHeight + 50) dy *= -1;
 
             img.style.left = x + 'px';
             img.style.top = y + 'px';
@@ -47,3 +47,4 @@ if (document.readyState === 'complete') {
 } else {
     window.addEventListener('load', initChaos);
 }
+

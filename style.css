@@ -34,3 +34,15 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 }
 
 
+
+/* MOBILUS PRITAIKYMAS */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem !important; }
+    p { font-size: 0.95rem !important; }
+    .glass-card { padding: 25px !important; width: 95% !important; }
+    .floating-img { width: 150px !important; } /* Mažesnes nuotraukos telefone */
+    nav { gap: 15px !important; padding: 15px 10px !important; }
+    nav a { font-size: 11px !important; letter-spacing: 1px !important; }
+    .social-links { bottom: 20px !important; gap: 20px !important; }
+    .social-links a { font-size: 24px !important; }
+}
