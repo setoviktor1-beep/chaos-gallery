@@ -2,44 +2,26 @@ const images = ['images/ChatGPT Image Feb 6, 2026, 10_55_15 AM.png', 'images/Gem
 const container = document.getElementById('canvas-container');
 
 if (images.length > 0) {
-    images.forEach((src, index) => {
+    images.forEach((src) => {
         const img = document.createElement('img');
         img.src = src;
         img.className = 'floating-img';
         
-        // Atsitiktine pozicija ekrane (X ir Y)
-        let x = (Math.random() - 0.5) * window.innerWidth * 1.5;
-        let y = (Math.random() - 0.5) * window.innerHeight * 1.5;
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let scale = 0.5 + Math.random();
         
-        // Gylio kintamieji (Z ašis)
-        let z = Math.random() * -3000; // Pradeda giliai
-        let speed = 2 + Math.random() * 5; // Greitis link taves
-        let rotation = Math.random() * 360;
-
-        img.style.position = 'absolute';
-        img.style.left = '50%';
-        img.style.top = '50%';
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        img.style.transform = 'scale(' + scale + ')';
         
         container.appendChild(img);
 
         function animate() {
-            z += speed;
-            
-            // Jei praskrido pro mus, gražiname i gala
-            if (z > 800) {
-                z = -3000;
-                x = (Math.random() - 0.5) * window.innerWidth * 1.5;
-                y = (Math.random() - 0.5) * window.innerHeight * 1.5;
-            }
-
-            // Skaidrumas: išnyra iš toli, išnyksta arti
-            let opacity = 0;
-            if (z > -2000) opacity = (z + 2000) / 1000; 
-            if (z > 200) opacity = (800 - z) / 600;
-
-            img.style.opacity = opacity;
-            img.style.transform = \	ranslate(-50%, -50%) translate3d(\px, \px, \px) rotate(\deg)\;
-            
+            scale += 0.005;
+            if (scale > 3) scale = 0.1;
+            img.style.transform = 'scale(' + scale + ')';
+            img.style.opacity = scale > 2 ? (3 - scale) : 1;
             requestAnimationFrame(animate);
         }
         animate();
