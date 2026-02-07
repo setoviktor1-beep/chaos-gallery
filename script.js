@@ -7,33 +7,41 @@ if (images.length > 0) {
         img.src = src;
         img.className = 'floating-img';
         
-        let x = Math.random() * (window.innerWidth - 250);
-        let y = Math.random() * (window.innerHeight - 250);
-        let dx = (Math.random() - 0.5) * 0.8; // Suletinau, kad butu dar ramiau
-        let dy = (Math.random() - 0.5) * 0.8;
-        let rotation = Math.random() * 360;
+        // Atsitiktine pozicija ekrane (X ir Y)
+        let x = (Math.random() - 0.5) * window.innerWidth * 1.5;
+        let y = (Math.random() - 0.5) * window.innerHeight * 1.5;
         
+        // Gylio kintamieji (Z ašis)
+        let z = Math.random() * -3000; // Pradeda giliai
+        let speed = 2 + Math.random() * 5; // Greitis link taves
+        let rotation = Math.random() * 360;
+
         img.style.position = 'absolute';
-        img.style.left = x + 'px';
-        img.style.top = y + 'px';
-        img.style.transform = 'rotate(' + rotation + 'deg)';
+        img.style.left = '50%';
+        img.style.top = '50%';
         
         container.appendChild(img);
 
         function animate() {
-            x += dx;
-            y += dy;
+            z += speed;
             
-            // Atšokimas nuo sienu
-            if (x < -150 || x > window.innerWidth - 100) dx *= -1;
-            if (y < -150 || y > window.innerHeight - 100) dy *= -1;
-            
-            img.style.left = x + 'px';
-            img.style.top = y + 'px';
+            // Jei praskrido pro mus, gražiname i gala
+            if (z > 800) {
+                z = -3000;
+                x = (Math.random() - 0.5) * window.innerWidth * 1.5;
+                y = (Math.random() - 0.5) * window.innerHeight * 1.5;
+            }
+
+            // Skaidrumas: išnyra iš toli, išnyksta arti
+            let opacity = 0;
+            if (z > -2000) opacity = (z + 2000) / 1000; 
+            if (z > 200) opacity = (800 - z) / 600;
+
+            img.style.opacity = opacity;
+            img.style.transform = \	ranslate(-50%, -50%) translate3d(\px, \px, \px) rotate(\deg)\;
             
             requestAnimationFrame(animate);
         }
         animate();
     });
 }
-// Peles sekimo logika pašalinta visam laikui.
