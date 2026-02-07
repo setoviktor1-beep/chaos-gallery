@@ -1,81 +1,33 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-body { 
-    background: #050505; /* Šiek tiek šviesesnis juodas, kad matytusi kontrastas */
-    color: white; 
-    overflow-x: hidden; 
-    min-height: 100vh;
-}
-#canvas-container { 
-    position: fixed; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%; 
-    z-index: 1; 
-    pointer-events: none; 
-}
-nav { 
-    position: fixed; top: 0; width: 100%; padding: 20px; 
-    display: flex; justify-content: center; gap: 30px; 
-    background: rgba(0,0,0,0.8); 
-    -webkit-backdrop-filter: blur(10px); /* Safari / Old Browsers */
-    backdrop-filter: blur(10px); 
-    z-index: 1000; 
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-nav a { color: #aaa; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; transition: color 0.3s; }
+body { background: #000 !important; color: white; overflow-x: hidden; min-height: 100vh; }
+#canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: center; gap: 30px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+nav a { color: #888; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; transition: 0.3s; }
 nav a:hover, nav a.active { color: #fff; }
-.content { 
-    position: relative; 
-    z-index: 500; /* Aukšciau už canvas */
-    min-height: 100vh; 
-    display: flex; align-items: center; justify-content: center; 
-    padding: 20px;
-}
-.glass-card { 
-    position: relative;
-    background: rgba(20, 20, 20, 0.85); /* Stipresnis fonas jei blur neveikia */
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    -webkit-backdrop-filter: blur(20px); /* Safari / Old Browsers */
-    backdrop-filter: blur(20px); 
-    padding: 40px; 
-    border-radius: 20px; 
-    max-width: 600px; 
-    width: 100%; 
-    text-align: center; 
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
-h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.content { position: relative; z-index: 500; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.glass-card { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); padding: 40px; border-radius: 20px; max-width: 600px; width: 100%; text-align: center; }
+h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 900; }
 p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
-.floating-img { 
-    position: absolute; 
-    width: 250px; 
-    height: auto; 
-    border-radius: 8px; 
-    z-index: 10; /* Žemiau už content */
-    opacity: 0; /* Pradžioje nematoma, JS padarys matoma */
-    transition: opacity 1s ease-in;
-    will-change: transform;
-}
+.floating-img { position: absolute; width: 250px; height: auto; border-radius: 8px; z-index: 10; opacity: 0; transition: opacity 1s; }
 
-
-
-
+/* SOCIAL LINKS - APACIOJE CENTRE */
 .social-links { 
-    position: fixed; 
-    bottom: 30px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    display: flex; 
-    gap: 25px; 
-    z-index: 2000; 
+    position: fixed !important; 
+    bottom: 40px !important; 
+    left: 50% !important; 
+    transform: translateX(-50%) !important; 
+    display: flex !important; 
+    gap: 30px !important; 
+    z-index: 9999 !important; 
 }
 .social-links a { 
-    color: #888; 
-    font-size: 28px; 
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    text-decoration: none;
+    color: #666 !important; 
+    font-size: 32px !important; 
+    transition: all 0.4s ease !important; 
+    text-decoration: none !important;
 }
 .social-links a:hover { 
-    color: #00d2ff; /* Keicia spalva i neonine */
-    transform: scale(1.6) translateY(-10px); 
-    text-shadow: 0 0 15px rgba(0, 210, 255, 0.8); 
+    color: #00d2ff !important; 
+    transform: scale(1.5) translateY(-10px) !important; 
+    text-shadow: 0 0 20px #00d2ff !important; 
 }
