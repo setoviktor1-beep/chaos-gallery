@@ -7,6 +7,7 @@ if (images.length > 0) {
         img.src = src;
         img.className = 'floating-img';
         
+        // Random initial positions
         let x = Math.random() * (window.innerWidth - 250);
         let y = Math.random() * (window.innerHeight - 250);
         let dx = (Math.random() - 0.5) * 1.5;
@@ -30,18 +31,39 @@ if (images.length > 0) {
             img.style.left = x + 'px';
             img.style.top = y + 'px';
             
+            // Išsaugome bazine transformacija animacijai, 
+            // kad peles efektas ja tik papildytu, o ne perrašytu
+            img.dataset.rotation = rotation;
+            
             requestAnimationFrame(animate);
         }
         animate();
     });
 }
 
-document.addEventListener('mousemove', (e) => {
+// Unified input handler
+function handleMove(x, y) {
     const floaters = document.querySelectorAll('.floating-img');
     floaters.forEach((img, i) => {
-        const speed = (i % 5 + 1) * 0.02;
-        const xMove = (e.clientX - window.innerWidth / 2) * speed;
-        const yMove = (e.clientY - window.innerHeight / 2) * speed;
-        img.style.transform += ' translate(' + xMove + 'px, ' + yMove + 'px)';
+        const speed = (i % 5 + 1) * 0.03; // Šiek tiek padidinau jautruma
+        const xMove = (x - window.innerWidth / 2) * speed;
+        const yMove = (y - window.innerHeight / 2) * speed;
+        
+        // Svarbu: išlaikome originalia rotacija!
+        const rotation = img.dataset.rotation || 0;
+        img.style.transform = \	ranslate(\px, \px) rotate(\deg)\;
     });
+}
+
+// Mouse
+document.addEventListener('mousemove', (e) => {
+    handleMove(e.clientX, e.clientY);
 });
+
+// Touch (Mobile)
+document.addEventListener('touchmove', (e) => {
+    // Prevent default scroll if needed, but usually better to let user scroll content
+    // e.preventDefault(); 
+    const touch = e.touches[0];
+    handleMove(touch.clientX, touch.clientY);
+}, { passive: true });
