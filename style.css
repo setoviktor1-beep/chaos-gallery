@@ -1,0 +1,11 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background: #0a0a0a; color: white; overflow-x: hidden; }
+#canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: center; gap: 30px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1); }
+nav a { color: #888; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; transition: 0.3s; }
+nav a:hover, nav a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+.content { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px; }
+.glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); padding: 40px; border-radius: 20px; max-width: 600px; width: 100%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 900; background: linear-gradient(45deg, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+p { font-size: 1.1rem; line-height: 1.6; color: #aaa; margin-bottom: 20px; }
+.floating-img { position: absolute; width: 250px; height: auto; border-radius: 10px; opacity: 0.6; pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.1s linear; }
