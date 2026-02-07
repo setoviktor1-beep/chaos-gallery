@@ -7,11 +7,10 @@ if (images.length > 0) {
         img.src = src;
         img.className = 'floating-img';
         
-        // Random initial positions
         let x = Math.random() * (window.innerWidth - 250);
         let y = Math.random() * (window.innerHeight - 250);
-        let dx = (Math.random() - 0.5) * 1.5;
-        let dy = (Math.random() - 0.5) * 1.5;
+        let dx = (Math.random() - 0.5) * 0.8; // Suletinau, kad butu dar ramiau
+        let dy = (Math.random() - 0.5) * 0.8;
         let rotation = Math.random() * 360;
         
         img.style.position = 'absolute';
@@ -25,45 +24,16 @@ if (images.length > 0) {
             x += dx;
             y += dy;
             
-            if (x < -100 || x > window.innerWidth - 150) dx *= -1;
-            if (y < -100 || y > window.innerHeight - 150) dy *= -1;
+            // Atšokimas nuo sienu
+            if (x < -150 || x > window.innerWidth - 100) dx *= -1;
+            if (y < -150 || y > window.innerHeight - 100) dy *= -1;
             
             img.style.left = x + 'px';
             img.style.top = y + 'px';
-            
-            // Išsaugome bazine transformacija animacijai, 
-            // kad peles efektas ja tik papildytu, o ne perrašytu
-            img.dataset.rotation = rotation;
             
             requestAnimationFrame(animate);
         }
         animate();
     });
 }
-
-// Unified input handler
-function handleMove(x, y) {
-    const floaters = document.querySelectorAll('.floating-img');
-    floaters.forEach((img, i) => {
-        const speed = (i % 5 + 1) * 0.03; // Šiek tiek padidinau jautruma
-        const xMove = (x - window.innerWidth / 2) * speed;
-        const yMove = (y - window.innerHeight / 2) * speed;
-        
-        // Svarbu: išlaikome originalia rotacija!
-        const rotation = img.dataset.rotation || 0;
-        img.style.transform = \	ranslate(\px, \px) rotate(\deg)\;
-    });
-}
-
-// Mouse
-document.addEventListener('mousemove', (e) => {
-    handleMove(e.clientX, e.clientY);
-});
-
-// Touch (Mobile)
-document.addEventListener('touchmove', (e) => {
-    // Prevent default scroll if needed, but usually better to let user scroll content
-    // e.preventDefault(); 
-    const touch = e.touches[0];
-    handleMove(touch.clientX, touch.clientY);
-}, { passive: true });
+// Peles sekimo logika pašalinta visam laikui.
