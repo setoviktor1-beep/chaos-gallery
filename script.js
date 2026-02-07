@@ -1,25 +1,26 @@
-const images = ['images/ChatGPT Image Feb 6, 2026, 10_55_15 AM.png', 'images/Gemini_Generated_Image_faxo2xfaxo2xfaxo.png', 'images/Gemini_Generated_Image_o8c0too8c0too8c0.png', 'images/Gemini_Generated_Image_p4tjbyp4tjbyp4tj (1).png', 'images/Gemini_Generated_Image_p4tjbyp4tjbyp4tj.png', 'images/Gemini_Generated_Image_rpo61arpo61arpo6.png', 'images/Gemini_Generated_Image_uhgiupuhgiupuhgi (1).png', 'images/Gemini_Generated_Image_uhgiupuhgiupuhgi (2).png', 'images/Gemini_Generated_Image_uhgiupuhgiupuhgi (3).png', 'images/Gemini_Generated_Image_uhgiupuhgiupuhgi.png', 'images/Gemini_Generated_Image_xwgmlcxwgmlcxwgm.png', 'images/Urban beauty in cinematic portraits.png', 'images/Whisk_728f68867ee6041a41a4a4bd4b43d4c6eg.png', 'images/Whisk_80ed6da6264229dac9a492db90751a83dr.jpeg', 'images/Whisk_89a5e3a418e948f979942311906426dedr (1).jpeg', 'images/Whisk_89a5e3a418e948f979942311906426dedr.jpeg', 'images/Whisk_9bf00ff958aafe0a139496e79b5c98c0dr (1).jpeg', 'images/Whisk_9bf00ff958aafe0a139496e79b5c98c0dr.jpeg', 'images/Whisk_fba09153ae516e1ab5a436e57d5d7cc1eg.png', 'images/Whisk_yjzijzm0mjm5etnw0sywutytcjykrtlyejmx0iy.gif'];
+const images = ['images/img-001.png', 'images/img-002.png', 'images/img-003.png', 'images/img-004.png', 'images/img-005.png', 'images/img-006.png', 'images/img-007.png', 'images/img-008.png', 'images/img-009.png', 'images/img-010.png', 'images/img-011.png', 'images/img-012.png', 'images/img-013.png', 'images/img-014.jpeg', 'images/img-015.jpeg', 'images/img-016.jpeg', 'images/img-017.jpeg', 'images/img-018.jpeg', 'images/img-019.png', 'images/img-020.gif'];
+
 window.onload = function() {
     const container = document.getElementById('canvas-container');
-    console.log('Rasta nuotrauku:', images.length);
+    console.log('Images found:', images.length);
 
     if (images.length > 0 && container) {
         images.forEach((src, index) => {
             const img = document.createElement('img');
             img.src = src;
             img.className = 'floating-img';
+            img.loading = 'eager';
             
             let x, y, z, speed, rotation, driftX, driftY, phase;
 
             function reset(isInitial) {
-                x = (Math.random() - 0.5) * window.innerWidth * 2.2;
-                y = (Math.random() - 0.5) * window.innerHeight * 2.2;
-                // Jei tai pradžia, išmetome jas per visa gyli, kad nereiketu laukti
-                z = isInitial ? (Math.random() * -3000) : -3000; 
+                x = (Math.random() - 0.5) * window.innerWidth * 2.0;
+                y = (Math.random() - 0.5) * window.innerHeight * 2.0;
+                z = isInitial ? (Math.random() * -3000) : -4000; 
                 speed = 2 + Math.random() * 3;
                 rotation = Math.random() * 360;
-                driftX = (Math.random() - 0.5) * 1.5;
-                driftY = (Math.random() - 0.5) * 1.5;
+                driftX = (Math.random() - 0.5) * 2;
+                driftY = (Math.random() - 0.5) * 2;
                 phase = Math.random() * Math.PI * 2;
             }
 
@@ -30,20 +31,22 @@ window.onload = function() {
                 z += speed;
                 phase += 0.005;
 
-                let currentX = x + Math.sin(phase) * 150 * driftX;
-                let currentY = y + Math.cos(phase * 0.8) * 150 * driftY;
+                let currentX = x + Math.sin(phase) * 100 * driftX;
+                let currentY = y + Math.cos(phase * 0.8) * 100 * driftY;
 
-                if (z > 1000) {
+                if (z > 800) {
                     reset(false);
                 }
 
                 let opacity = 0;
                 if (z > -2500) opacity = (z + 2500) / 1000;
-                if (z > 500) opacity = (1000 - z) / 500;
-                if (opacity > 0.7) opacity = 0.7;
+                if (z > 200) opacity = (800 - z) / 600;
+                if (opacity > 0.8) opacity = 0.8;
 
                 img.style.opacity = opacity;
-                img.style.transform = \	ranslate(-50%, -50%) translate3d(\px, \px, \px) rotate(\deg)\;
+                
+                // FIXED LINE: String concatenation instead of interpolation
+                img.style.transform = 'translate(-50%, -50%) translate3d(' + currentX + 'px, ' + currentY + 'px, ' + z + 'px) rotate(' + (rotation + z/15) + 'deg)';
                 
                 requestAnimationFrame(animate);
             }
