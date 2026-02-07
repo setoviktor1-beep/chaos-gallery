@@ -7,27 +7,41 @@ if (images.length > 0) {
         img.src = src;
         img.className = 'floating-img';
         
-        let x = Math.random() * window.innerWidth;
-        let y = Math.random() * window.innerHeight;
-        let dx = (Math.random() - 0.5) * 2;
-        let dy = (Math.random() - 0.5) * 2;
+        let x = Math.random() * (window.innerWidth - 250);
+        let y = Math.random() * (window.innerHeight - 250);
+        let dx = (Math.random() - 0.5) * 1.5;
+        let dy = (Math.random() - 0.5) * 1.5;
         let rotation = Math.random() * 360;
         
+        img.style.position = 'absolute';
         img.style.left = x + 'px';
         img.style.top = y + 'px';
-        img.style.transform = otate( + rotation + deg);
+        img.style.transform = 'rotate(' + rotation + 'deg)';
         
         container.appendChild(img);
 
         function animate() {
             x += dx;
             y += dy;
-            if (x < -200 || x > window.innerWidth) dx *= -1;
-            if (y < -200 || y > window.innerHeight) dy *= -1;
+            
+            if (x < -100 || x > window.innerWidth - 150) dx *= -1;
+            if (y < -100 || y > window.innerHeight - 150) dy *= -1;
+            
             img.style.left = x + 'px';
             img.style.top = y + 'px';
+            
             requestAnimationFrame(animate);
         }
         animate();
     });
 }
+
+document.addEventListener('mousemove', (e) => {
+    const floaters = document.querySelectorAll('.floating-img');
+    floaters.forEach((img, i) => {
+        const speed = (i % 5 + 1) * 0.02;
+        const xMove = (e.clientX - window.innerWidth / 2) * speed;
+        const yMove = (e.clientY - window.innerHeight / 2) * speed;
+        img.style.transform += ' translate(' + xMove + 'px, ' + yMove + 'px)';
+    });
+});
