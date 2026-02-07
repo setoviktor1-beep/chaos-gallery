@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mano projektai</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <title>Mano Projektai - Chaos Gallery</title>
+    <link rel="stylesheet" href="style.css?v=15">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap&subset=latin-ext" rel="stylesheet">
-    <!-- Font Awesome 6.5.1 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div id="canvas-container"></div>
     <nav>
-        <a href="index.html" class="">Pradžia</a>
-        <a href="apie.html" class="">Apie</a>
+        <a href="index.html">Pradžia</a>
+        <a href="apie.html">Apie</a>
         <a href="projektai.html" class="active">Projektai</a>
-        <a href="kontaktai.html" class="">Kontaktai</a>
+        <a href="kontaktai.html">Kontaktai</a>
     </nav>
-    <div class="content">
-        <div class="glass-card">
-            <h1>PROJEKTAI</h1>
-            <p>Čia galite rasti atrinktus darbus, kurie balansuoja tarp technologijų ir meno.</p>
+    
+    <div class="content" style="flex-direction: column;">
+        <h1 style="margin-bottom: 10px;">MANO DARBAI</h1>
+        <p style="margin-bottom: 30px; opacity: 0.7;">Atrinkti skaitmeniniai sprendimai ir eksperimentai.</p>
+        
+        <div class="project-grid">
+            <!-- Projektas 1 -->
+            <div class="project-card">
+                <h2>Motion Letters</h2>
+                <p>Interaktyvi tipografija ir animuoti raidžių eksperimentai, sukurti naudojant modernias web technologijas.</p>
+                <a href="https://setoviktor1-beep.github.io/motion-letters/" target="_blank" class="project-btn">Žiūrėti projektą</a>
+            </div>
+
+            <!-- Projektas 2 -->
+            <div class="project-card">
+                <h2>Situacija.eu</h2>
+                <p>Profesionali platforma, skirta informacijos valdymui ir vartotojų įtraukimui. Modernus ir švarus dizainas.</p>
+                <a href="https://situacija.eu/" target="_blank" class="project-btn">Žiūrėti projektą</a>
+            </div>
+
+            <!-- Projektas 3 -->
+            <div class="project-card">
+                <h2>Teisinė Atrama</h2>
+                <p>Specializuotas teisinių paslaugų puslapis, orientuotas į aiškumą, pasitikėjimą ir informatyvumą.</p>
+                <a href="http://xn--teisinatrama-jvb.lt/" target="_blank" class="project-btn">Žiūrėti projektą</a>
+            </div>
         </div>
     </div>
     
