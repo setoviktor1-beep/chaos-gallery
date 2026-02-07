@@ -9,38 +9,31 @@ function initChaos() {
         img.src = src;
         img.className = 'floating-img';
         
-        let x, y, z, speed, rotation, driftX, driftY, phase;
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let dx = (Math.random() - 0.5) * 1.5;
+        let dy = (Math.random() - 0.5) * 1.5;
+        let rot = Math.random() * 360;
+        let rotSpeed = (Math.random() - 0.5) * 0.5;
 
-        function reset(isInitial) {
-            x = (Math.random() - 0.5) * window.innerWidth * 2.5;
-            y = (Math.random() - 0.5) * window.innerHeight * 2.5;
-            z = isInitial ? (Math.random() * -4000) : -4000;
-            speed = 2 + Math.random() * 4;
-            rotation = Math.random() * 360;
-            driftX = (Math.random() - 0.5) * 2;
-            driftY = (Math.random() - 0.5) * 2;
-            phase = Math.random() * Math.PI * 2;
-        }
-
-        reset(true);
+        img.style.position = 'absolute';
+        img.style.width = '300px'; // Didesnės nuotraukos
+        img.style.opacity = '0.6';
+        
         container.appendChild(img);
 
         function animate() {
-            z += speed;
-            phase += 0.005;
+            x += dx;
+            y += dy;
+            rot += rotSpeed;
 
-            let curX = x + Math.sin(phase) * 150 * driftX;
-            let curY = y + Math.cos(phase * 0.8) * 150 * driftY;
+            // Atšokimas nuo sienų
+            if (x < -100 || x > window.innerWidth - 200) dx *= -1;
+            if (y < -100 || y > window.innerHeight - 200) dy *= -1;
 
-            if (z > 1000) reset(false);
-
-            let op = 0;
-            if (z > -3000) op = (z + 3000) / 1500;
-            if (z > 400) op = (1000 - z) / 600;
-            if (op > 0.8) op = 0.8;
-
-            img.style.opacity = op;
-            img.style.transform = `translate(-50%, -50%) translate3d(${curX}px, ${curY}px, ${z}px) rotate(${rotation + z/10}deg)`;
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+            img.style.transform = 'rotate(' + rot + 'deg)';
             
             requestAnimationFrame(animate);
         }
@@ -48,5 +41,9 @@ function initChaos() {
     });
 }
 
-// Paleidžiame iškart
-initChaos();
+// Paleidžiame iškart, bet užtikriname, kad DOM yra
+if (document.readyState === 'complete') {
+    initChaos();
+} else {
+    window.addEventListener('load', initChaos);
+}
